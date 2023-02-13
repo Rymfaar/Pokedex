@@ -1,16 +1,21 @@
-# pokedex
+# Pokedex
 
-A new Flutter project.
+## Introduction
 
-## Getting Started
+### Why this project exists?
 
-This project is a starting point for a Flutter application.
+The Pokedex project is created to learn how to use BLoC and benchmark how effective it is. The main purpose behind it is to create articles about this well-known Flutter architecture. This project uses:
 
-A few resources to get you started if this is your first Flutter project:
+* [Flutter](https://flutter.dev/) and Dart to build the app
+* Uses the [Pokebuild API](https://pokebuildapi.fr/api/v1) to fetch its data
+* Uses [Buddy](https://buddy.works/) as a CI tool
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### What about design?
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+As the main purpose is not to build a beautiful app, I opted for a simple wireframe design. You can find these designs [here](https://www.figma.com/file/2cw87gTgj2aEs9T8ofL1XW/Pokemon-BLoC?node-id=0%3A1&t=7SfsFr8on4V9GeNx-1), it was made using [Figma](https://www.figma.com/). 
+
+## How to launch the project?
+
+1. Clone the project
+2. Install [Flutter](https://docs.flutter.dev/get-started/install)
+3. TBA
