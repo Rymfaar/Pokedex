@@ -47,4 +47,4 @@ app.*.map.json
 /android/app/release
 
 # Flutter Version Manager
-.fvm/flutter_sdk/
+.fvm/flutter_sdk
