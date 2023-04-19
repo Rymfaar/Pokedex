@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/pokemon/models/pokemon_model.dart';
+import 'package:pokedex/pokemon/views/pokemon_page.dart';
 
 class PokemonListItem extends StatelessWidget {
   const PokemonListItem({super.key, required this.pokemon});
@@ -15,6 +16,14 @@ class PokemonListItem extends StatelessWidget {
         title: Text(pokemon.name),
         subtitle: Text(pokemon.pokedexId.toString()),
         trailing: Image.network(pokemon.pictureUrl),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return PokemonPage(pokemon: pokemon);
+            },
+          ),
+        ),
       ),
     );
   }
