@@ -5,18 +5,18 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokedex/pokemon/models/pokemon_model.dart';
+import 'package:pokedex/pokemon/repository/pokemon_repository.dart';
 
 part 'pokemon_event.dart';
 part 'pokemon_state.dart';
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
-  PokemonBloc({required this.httpClient}) : super(const PokemonState()) {
-    on<PokemonFetched>(
-      _onPokemonFetched,
-    );
+  PokemonBloc() : super(const PokemonState()) {
+    on<PokemonFetched>(_onPokemonFetched);
+    on<PokemonLike>(_onPokemonLiked);
   }
 
-  final http.Client httpClient;
+  final PokemonRepository _pokemonRepository = PokemonRepository();
 
   Future<void> _onPokemonFetched(
     PokemonFetched event,
@@ -24,7 +24,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   ) async {
     try {
       if (state.status == PokemonStatus.initial) {
-        final pokemons = await _fetchPokemons();
+        final pokemons = await _pokemonRepository.fetchPokemons();
         return emit(
           state.copyWith(
             status: PokemonStatus.success,
@@ -32,7 +32,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
           ),
         );
       }
-      final pokemons = await _fetchPokemons(state.pokemons.length);
+      final pokemons = await _pokemonRepository.fetchPokemons();
       pokemons.isEmpty
           ? emit(state.copyWith(status: PokemonStatus.failure))
           : emit(
@@ -48,22 +48,21 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     }
   }
 
-  Future<List<Pokemon>> _fetchPokemons([int startIndex = 0]) async {
-    final response = await httpClient.get(
-      Uri.parse('https://pokebuildapi.fr/api/v1/pokemon/'),
-    );
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body) as List;
-      return body.map((dynamic json) {
-        final map = json as Map<String, dynamic>;
-        return Pokemon(
-          id: map['id'] as int,
-          name: map['name'] as String,
-          pictureUrl: map['image'] as String,
-          pokedexId: map['pokedexId'] as int,
-        );
-      }).toList();
+  void _onPokemonLiked(
+    PokemonLike event,
+    Emitter<PokemonState> emit,
+  ) {
+    try {
+      // emit(
+      //   state.copyWith(
+      //     status: PokemonStatus.success,
+      //     pokemons: List.of(state.pokemons)..addAll(pokemons),
+      //   ),
+      // );
+    } catch (_) {
+      emit(
+        state.copyWith(status: PokemonStatus.failure),
+      );
     }
-    throw Exception('error fetching pokemons');
   }
 }

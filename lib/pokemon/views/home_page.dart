@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:pokedex/pokemon/bloc/pokemon_bloc.dart';
 import 'package:pokedex/pokemon/views/pokemon_list.dart';
 
@@ -12,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Pokedex App')),
       body: BlocProvider(
-        create: (_) => PokemonBloc(httpClient: http.Client())..add(PokemonFetched()),
+        create: (_) => PokemonBloc()..add(PokemonFetched()),
         child: const PokemonsList(),
       ),
     );

@@ -5,12 +5,14 @@ class Pokemon extends Equatable {
   final int pokedexId;
   final String name;
   final String pictureUrl;
+  bool isLiked;
 
-  const Pokemon({
+  Pokemon({
     required this.id,
     required this.pokedexId,
     required this.name,
     required this.pictureUrl,
+    this.isLiked = false,
   });
 
   @override

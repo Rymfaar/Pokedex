@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/pokedex_bloc_observer.dart';
 import 'package:pokedex/pokemon/views/home_page.dart';
 
 void main() {
-  Bloc.observer = PokedexBlocObserver();
   runApp(const MyApp());
 }
 

@@ -10,19 +10,25 @@ class PokemonListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Material(
-      child: ListTile(
-        leading: Text('${pokemon.id}', style: textTheme.bodySmall),
-        title: Text(pokemon.name),
-        subtitle: Text(pokemon.pokedexId.toString()),
-        trailing: Image.network(pokemon.pictureUrl),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return PokemonPage(pokemon: pokemon);
-            },
-          ),
+    return ListTile(
+      leading: Image.network(pokemon.pictureUrl),
+      title: Text(
+        pokemon.name,
+        style: textTheme.bodyLarge,
+      ),
+      subtitle: Text(pokemon.pokedexId.toString()),
+      trailing: IconButton(
+        icon: Icon(pokemon.isLiked ? Icons.favorite : Icons.favorite_border),
+        onPressed: () {
+          // pokemon.isLiked = !pokemon.isLiked;
+        },
+      ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return PokemonPage(pokemon: pokemon);
+          },
         ),
       ),
     );

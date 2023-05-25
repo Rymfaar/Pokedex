@@ -6,3 +6,5 @@ abstract class PokemonEvent extends Equatable {
 }
 
 class PokemonFetched extends PokemonEvent {}
+
+class PokemonLike extends PokemonEvent {}
