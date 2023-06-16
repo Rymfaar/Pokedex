@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:http/http.dart' as http;
 import 'package:pokedex/pokemon/models/pokemon_model.dart';
 import 'package:pokedex/pokemon/repository/pokemon_repository.dart';
 
@@ -13,7 +12,6 @@ part 'pokemon_state.dart';
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   PokemonBloc() : super(const PokemonState()) {
     on<PokemonFetched>(_onPokemonFetched);
-    on<PokemonLike>(_onPokemonLiked);
   }
 
   final PokemonRepository _pokemonRepository = PokemonRepository();
@@ -47,22 +45,26 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
       );
     }
   }
-
-  void _onPokemonLiked(
-    PokemonLike event,
-    Emitter<PokemonState> emit,
-  ) {
-    try {
-      // emit(
-      //   state.copyWith(
-      //     status: PokemonStatus.success,
-      //     pokemons: List.of(state.pokemons)..addAll(pokemons),
-      //   ),
-      // );
-    } catch (_) {
-      emit(
-        state.copyWith(status: PokemonStatus.failure),
-      );
-    }
-  }
 }
+
+
+    // on<PokemonLike>(_onPokemonLiked);
+
+
+// void _onPokemonLiked(
+//     PokemonLike event,
+//     Emitter<PokemonState> emit,
+//   ) {
+//     try {
+//       // emit(
+//       //   state.copyWith(
+//       //     status: PokemonStatus.success,
+//       //     pokemons: List.of(state.pokemons)..addAll(pokemons),
+//       //   ),
+//       // );
+//     } catch (_) {
+//       emit(
+//         state.copyWith(status: PokemonStatus.failure),
+//       );
+//     }
+//   }
