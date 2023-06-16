@@ -5,9 +5,9 @@ class Pokemon extends Equatable {
   final int pokedexId;
   final String name;
   final String pictureUrl;
-  bool isLiked;
+  final bool isLiked;
 
-  Pokemon({
+  const Pokemon({
     required this.id,
     required this.pokedexId,
     required this.name,
@@ -16,5 +16,21 @@ class Pokemon extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, pokedexId, pictureUrl, name];
+  List<Object?> get props => [
+        id,
+        pokedexId,
+        pictureUrl,
+        name,
+        isLiked,
+      ];
+}
+
+extension PokemonExtension on Pokemon {
+  Pokemon updateLikeStatus(bool isLiked) => Pokemon(
+        id: id,
+        pokedexId: pokedexId,
+        name: name,
+        pictureUrl: pictureUrl,
+        isLiked: isLiked,
+      );
 }

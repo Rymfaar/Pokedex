@@ -7,4 +7,15 @@ abstract class PokemonEvent extends Equatable {
 
 class PokemonFetched extends PokemonEvent {}
 
-class PokemonLike extends PokemonEvent {}
+class PokemonLike extends PokemonEvent {
+  final bool isLiked;
+  final Pokemon pokemon;
+
+  PokemonLike({
+    required this.pokemon,
+    required this.isLiked,
+  });
+
+  @override
+  List<Object> get props => [pokemon, isLiked];
+}
