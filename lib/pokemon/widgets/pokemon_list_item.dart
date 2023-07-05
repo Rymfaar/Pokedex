@@ -18,24 +18,36 @@ class PokemonListItem extends StatelessWidget {
         pokemon.name,
         style: textTheme.bodyLarge,
       ),
-      subtitle: Text(pokemon.pokedexId.toString()),
+      subtitle: Text(
+        pokemon.pokedexId.toString(),
+      ),
       trailing: IconButton(
         icon: Icon(pokemon.isLiked ? Icons.favorite : Icons.favorite_border),
-        onPressed: () {
-          context.read<PokemonBloc>().add(PokemonLike(
-                isLiked: !pokemon.isLiked,
-                pokemon: pokemon,
-              ));
-          // pokemon.isLiked = !pokemon.isLiked;
-        },
+        onPressed: () => _onPokemonLiked(context),
       ),
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return PokemonPage(pokemon: pokemon);
-          },
-        ),
+      onTap: () => _onPokemonTap(context),
+    );
+  }
+
+  void _onPokemonLiked(BuildContext context) {
+    context.read<PokemonBloc>().add(
+          PokemonLike(
+            isLiked: !pokemon.isLiked,
+            pokemon: pokemon,
+          ),
+        );
+  }
+
+  void _onPokemonTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return PokemonPage(
+            pokemon: pokemon,
+            blocContext: context,
+          );
+        },
       ),
     );
   }

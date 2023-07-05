@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Pokedex App')),
       body: BlocProvider(
+        lazy: false,
         create: (_) => PokemonBloc()..add(PokemonFetched()),
         child: const PokemonsList(),
       ),
