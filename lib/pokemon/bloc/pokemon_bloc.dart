@@ -9,27 +9,21 @@ part 'pokemon_event.dart';
 part 'pokemon_state.dart';
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
-  PokemonBloc() : super(const PokemonState()) {
+  PokemonBloc({
+    required PokemonRepository pokemonRepository,
+  })  : _pokemonRepository = pokemonRepository,
+        super(const PokemonState()) {
     on<PokemonFetched>(_onPokemonFetched);
     on<PokemonLike>(_onPokemonLiked);
   }
 
-  final PokemonRepository _pokemonRepository = PokemonRepository();
+  final PokemonRepository _pokemonRepository;
 
   Future<void> _onPokemonFetched(
     PokemonFetched event,
     Emitter<PokemonState> emit,
   ) async {
     try {
-      if (state.status == PokemonStatus.initial) {
-        final pokemons = await _pokemonRepository.fetchPokemons();
-        return emit(
-          state.copyWith(
-            status: PokemonStatus.success,
-            pokemons: pokemons,
-          ),
-        );
-      }
       final pokemons = await _pokemonRepository.fetchPokemons();
       pokemons.isEmpty
           ? emit(state.copyWith(status: PokemonStatus.failure))
