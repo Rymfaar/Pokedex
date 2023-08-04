@@ -1,6 +1,6 @@
 name: pokedex
 description: A Pokédex project using Flutter BLoC.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -9,16 +9,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
-  dio: ^5.0.0
+  bloc: ^8.1.0
+  bloc_concurrency: ^0.2.0
+  http: ^0.13.0
+  stream_transform: ^2.0.0
+  bloc_test: ^9.1.3
+  dio: ^5.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  mockito: ^5.4.2
+  build_runner: ^2.3.3
 
 flutter:
   uses-material-design: true
